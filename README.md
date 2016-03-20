@@ -9,8 +9,8 @@ a monad.
 ``` Kotlin
     val message : String? = "This a nullable value"
 
-    message.map{it -> it + " that has been mapped")
-           .filter{it -> it.length < 10)
+    message.map{it -> it + " that has been mapped"}
+           .filter{it -> it.length < 10}
            .ifSome(logShortMessageReceived())
            .ifNone(logNullMessageReceived())
 ```
