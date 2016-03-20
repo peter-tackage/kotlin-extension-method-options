@@ -22,7 +22,7 @@ fun <T> T?.isSome(): Boolean {
  * Returns true if the value is null, false otherwise.
  */
 fun <T> T?.isNone(): Boolean {
-    return this == null;
+    return this == null
 }
 
 /**
@@ -51,14 +51,14 @@ inline fun <T> T?.filter(f: (T) -> Boolean): T? {
  * If the value is non-null, map to a non-nullable value according to the given function, otherwise return a null value.
  */
 inline fun <T, R> T?.map(f: (T) -> R): R? {
-    return if (this != null) f.invoke(this) else null;
+    return if (this != null) f.invoke(this) else null
 }
 
 /**
  * If the value is non-null, map the value to a nullable value according to the given function, otherwise return a null value.
  */
 inline fun <T, R> T?.flatMap(f: (T) -> R?): R? {
-    return if (this != null) f.invoke(this) else null;
+    return if (this != null) f.invoke(this) else null
 }
 
 /**
