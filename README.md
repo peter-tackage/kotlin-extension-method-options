@@ -15,5 +15,7 @@ a monad.
            .ifNone(logNullMessageReceived())
 ```
 
+## License
 
+Copyright (c) Peter Tackage 2016
 
