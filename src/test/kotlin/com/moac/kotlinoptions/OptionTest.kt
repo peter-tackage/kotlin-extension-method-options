@@ -79,7 +79,7 @@ class TestSource {
     @Test
     fun test_flatMap_returnsNull_whenNull() {
         val obj: Any? = null
-        val flatMapper: FlatMapper<Any, Any> = FlatMapper(Any())
+        val flatMapper: TestFlatMapper<Any, Any> = TestFlatMapper(Any())
 
         val result: Any? = obj.flatMap(flatMapper)
 
@@ -193,7 +193,7 @@ class TestSource {
     data class Dummy(val nullable: Any?) {
     }
 
-    class TestPredicate<T : Any?> constructor(expectedResult: Boolean) : (T) -> Boolean {
+    class TestPredicate<T : Any?>(expectedResult: Boolean) : (T) -> Boolean {
 
         private var isInvoked: Boolean = false
         private val expectedResult: Boolean = expectedResult
@@ -208,7 +208,7 @@ class TestSource {
         }
     }
 
-    class TestMapper<T : Any?, R> constructor(expectedResult: R) : (T) -> R {
+    class TestMapper<T : Any?, R>(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult
@@ -223,7 +223,7 @@ class TestSource {
         }
     }
 
-    class FlatMapper<T : Any?, R : Any?> constructor(expectedResult: R) : (T) -> R {
+    class TestFlatMapper<T : Any?, R : Any?>(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult
