@@ -64,7 +64,7 @@ inline fun <T, R> T?.flatMap(f: (T) -> R?): R? {
 /**
  * Returns the value if it is non-null, otherwise return a nullable value according to the given function.
  */
-inline fun <T> T?.orOption(f: () -> T?): T? {
+inline fun <T> T?.orNullable(f: () -> T?): T? {
     return this ?: f.invoke()
 }
 

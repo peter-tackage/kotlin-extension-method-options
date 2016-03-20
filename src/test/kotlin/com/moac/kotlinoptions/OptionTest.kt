@@ -122,18 +122,18 @@ class TestSource {
     }
 
     @Test
-    fun test_orOption_returnInput_whenNotNull() {
+    fun test_orNullable_returnInput_whenNotNull() {
         val obj: Any? = Any()
 
-        assertEquals(obj, obj.orOption { Any() })
+        assertEquals(obj, obj.orNullable { Any() })
     }
 
     @Test
-    fun test_orOption_returnAlternative_whenNull() {
+    fun test_orNullable_returnAlternative_whenNull() {
         val obj: Any? = null
         val obj2: Any? = Any()
 
-        assertEquals(obj2, obj.orOption { obj2 })
+        assertEquals(obj2, obj.orNullable { obj2 })
     }
 
     @Test
