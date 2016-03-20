@@ -173,6 +173,21 @@ class TestSource {
         assertFalse(invoked)
     }
 
+    @Test
+    fun test_orValue_returnsInput_whenNotNull() {
+        val obj: Any? = Any()
+
+        assertEquals(obj, obj.orValue { Any() })
+    }
+
+    @Test
+    fun test_orValue_returnsAlternative_whenNotNull() {
+        val obj: Any? = null
+        val obj2: Any = Any()
+
+        assertEquals(obj2, obj.orValue { obj2 })
+    }
+
     // Helpers
 
     data class Dummy(val nullable: Any?) {

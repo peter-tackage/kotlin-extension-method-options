@@ -64,6 +64,13 @@ inline fun <T : Any?> T?.orOption(f: () -> T?): T? {
     return this ?: f.invoke()
 }
 
+/**
+ * Return the value if it non-null, otherwise return the non-null value produced by the given function.
+ */
+inline fun <T : Any> T?.orValue(f: () -> T): T {
+    return this ?: f.invoke()
+}
+
 
 
 
