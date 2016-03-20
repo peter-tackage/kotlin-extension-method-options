@@ -25,7 +25,7 @@ class TestSource {
     @Test
     fun test_filter_doesNothing_whenNull() {
         val obj: Any? = null
-        val predicate: Predicate<Any?> = Predicate(false)
+        val predicate: TestPredicate<Any?> = TestPredicate(false)
 
         val result: Any? = obj.filter(predicate)
 
@@ -36,7 +36,7 @@ class TestSource {
     @Test
     fun test_filter_returnsInput_whenNotNullAndPredicateReturnsTrue() {
         val obj: Any? = Any()
-        val predicate: Predicate<Any?> = Predicate(true)
+        val predicate: TestPredicate<Any?> = TestPredicate(true)
 
         val result: Any? = obj.filter(predicate)
 
@@ -47,7 +47,7 @@ class TestSource {
     @Test
     fun test_filter_returnsNull_whenNotNullAndPredicateReturnsFalse() {
         val obj: Any? = Any()
-        val predicate: Predicate<Any?> = Predicate(false)
+        val predicate: TestPredicate<Any?> = TestPredicate(false)
 
         val result: Any? = obj.filter(predicate)
 
@@ -59,7 +59,7 @@ class TestSource {
     @Test
     fun test_map_returnsNull_whenNull() {
         val obj: Any? = null
-        val mapper: Mapper<Any, Any> = Mapper(Any())
+        val mapper: TestMapper<Any, Any> = TestMapper(Any())
 
         val result: Any? = obj.map(mapper)
 
@@ -193,7 +193,7 @@ class TestSource {
     data class Dummy(val nullable: Any?) {
     }
 
-    class Predicate<T : Any?> constructor(expectedResult: Boolean) : (T) -> Boolean {
+    class TestPredicate<T : Any?> constructor(expectedResult: Boolean) : (T) -> Boolean {
 
         private var isInvoked: Boolean = false
         private val expectedResult: Boolean = expectedResult
@@ -208,7 +208,7 @@ class TestSource {
         }
     }
 
-    class Mapper<T : Any?, R> constructor(expectedResult: R) : (T) -> R {
+    class TestMapper<T : Any?, R> constructor(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult
