@@ -218,7 +218,7 @@ class TestSource {
     data class Dummy(val nullable: Any?) {
     }
 
-    class TestPredicate<T : Any?>(expectedResult: Boolean) : (T) -> Boolean {
+    class TestPredicate<T>(expectedResult: Boolean) : (T) -> Boolean {
 
         private var isInvoked: Boolean = false
         private val expectedResult: Boolean = expectedResult
@@ -233,7 +233,7 @@ class TestSource {
         }
     }
 
-    class TestMapper<T : Any?, R>(expectedResult: R) : (T) -> R {
+    class TestMapper<T, R : Any>(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult
@@ -248,7 +248,7 @@ class TestSource {
         }
     }
 
-    class TestFlatMapper<T : Any, R : Any?>(expectedResult: R) : (T) -> R {
+    class TestFlatMapper<T : Any, R>(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult
@@ -262,5 +262,6 @@ class TestSource {
             return this.isInvoked
         }
     }
+
 
 }
