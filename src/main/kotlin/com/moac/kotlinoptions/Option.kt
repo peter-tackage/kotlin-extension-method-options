@@ -77,6 +77,6 @@ inline fun <T> T?.orValue(f: () -> T): T {
 /**
  * Returns the result of the combination function, if this and the given values are non-null.
  */
-inline fun <T, R : Any> T?.combine(n1: T, f2: (T, T) -> R): R? {
+inline fun <T : Any, R : Any> T?.combine(n1: T?, f2: (T, T) -> R): R? {
     return this?.let { it1 -> n1.map { it2 -> f2.invoke(it1, it2) } }
 }

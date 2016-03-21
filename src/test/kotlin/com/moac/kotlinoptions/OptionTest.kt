@@ -193,7 +193,7 @@ class TestSource {
         val obj: Any? = null
         val obj2: Any? = Any()
 
-        assertNull(obj.combine(obj2, { `_`, `__` -> }))
+        assertNull(obj.combine(obj2, { v1, v2 -> }))
     }
 
     @Test
@@ -201,7 +201,7 @@ class TestSource {
         val obj: Any? = Any()
         val obj2: Any? = null
 
-        assertNull(obj.combine(obj2, { `_`, `__` -> }))
+        assertNull(obj.combine(obj2, { v1, v2 -> }))
     }
 
     @Test
@@ -210,7 +210,7 @@ class TestSource {
         val obj2: Any? = Any()
         val result: Any = Any()
 
-        assertEquals(result, obj.combine(obj2, { `_`, `__` -> result }))
+        assertEquals(result, obj.combine(obj2, { v1, v2 -> result }))
     }
 
     // Helpers
