@@ -79,7 +79,7 @@ class TestSource {
     @Test
     fun test_flatMap_returnsNull_whenNull() {
         val obj: Any? = null
-        val flatMapper: TestFlatMapper<Any, Any> = TestFlatMapper(Any())
+        val flatMapper: TestFlatMapper<Any, Any?> = TestFlatMapper(Any())
 
         val result: Any? = obj.flatMap(flatMapper)
 
@@ -183,9 +183,34 @@ class TestSource {
     @Test
     fun test_orValue_returnsAlternative_whenNotNull() {
         val obj: Any? = null
-        val obj2: Any = Any()
+        val obj2: Any? = Any()
 
         assertEquals(obj2, obj.orValue { obj2 })
+    }
+
+    @Test
+    fun test_combine_returnsNull_whenFirstNull() {
+        val obj: Any? = null
+        val obj2: Any? = Any()
+
+        assertNull(obj.combine(obj2, { a, b -> Any() }))
+    }
+
+    @Test
+    fun test_combine_returnsNull_whenSecondNull() {
+        val obj: Any? = Any()
+        val obj2: Any? = null
+
+        assertNull(obj.combine(obj2, { a, b -> Any() }))
+    }
+
+    @Test
+    fun test_combine_returnsCombinedResult_whenNoNull() {
+        val obj: Any? = Any()
+        val obj2: Any? = Any()
+        val result: Any = Any()
+
+        assertEquals(result, obj.combine(obj2, { a, b -> result }))
     }
 
     // Helpers
@@ -223,7 +248,7 @@ class TestSource {
         }
     }
 
-    class TestFlatMapper<T : Any?, R : Any?>(expectedResult: R) : (T) -> R {
+    class TestFlatMapper<T : Any, R : Any?>(expectedResult: R) : (T) -> R {
 
         private var isInvoked: Boolean = false
         private val expectedResult: R = expectedResult

@@ -49,7 +49,7 @@ inline fun <T> T?.filter(f: (T) -> Boolean): T? {
 /**
  * If the value is non-null, map to a non-nullable value according to the given function, otherwise return a null value.
  */
-inline fun <T, R> T?.map(f: (T) -> R): R? {
+inline fun <T, R : Any> T?.map(f: (T) -> R): R? {
     return this?.let { f.invoke(it) }
 }
 
@@ -72,4 +72,11 @@ inline fun <T> T?.orNullable(f: () -> T?): T? {
  */
 inline fun <T> T?.orValue(f: () -> T): T {
     return this ?: f.invoke()
+}
+
+/**
+ * Returns the result of the combination function, if this and the given values are non-null.
+ */
+inline fun <T, R : Any> T?.combine(n1: T, f2: (T, T) -> R): R? {
+    return this?.let { it1 -> n1.map { it2 -> f2.invoke(it1, it2) } }
 }
