@@ -1,7 +1,6 @@
 # Kotlin Options
 
-A collection of Kotlin extension methods that allow you treat Kotlin's nullable type as
-a monad.
+A collection of Kotlin extension methods that allow you powerfully transform Kotlin's nullable types.
 
 ## Usage:
 
@@ -27,6 +26,12 @@ You could perform an action to log the user's name or an error message:
             .orValue { "No user to login!" }
             .ifSome { log(it) }
 ```
+
+## Options in other languages
+
+* [Java 8](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)
+* [Scala](http://www.scala-lang.org/api/2.7.4/scala/Option.html)
+* [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html)
 
 ## License
 
