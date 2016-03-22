@@ -70,7 +70,7 @@ inline fun <T> T?.orNullable(func: () -> T?): T? {
 /**
  * Returns the value if it non-null, otherwise return the non-null value produced by the given function.
  */
-inline fun <T> T?.orValue(func: () -> T): T {
+inline fun <T> T?.orElse(func: () -> T): T {
     return this ?: func.invoke()
 }
 

@@ -174,18 +174,18 @@ class OptionTest {
     }
 
     @Test
-    fun test_orValue_returnsInput_whenNotNull() {
+    fun test_orElse_returnsInput_whenNotNull() {
         val obj: Any? = Any()
 
-        assertEquals(obj, obj.orValue { Any() })
+        assertEquals(obj, obj.orElse { Any() })
     }
 
     @Test
-    fun test_orValue_returnsAlternative_whenNotNull() {
+    fun test_orElse_returnsAlternative_whenNull() {
         val obj: Any? = null
         val obj2: Any? = Any()
 
-        assertEquals(obj2, obj.orValue { obj2 })
+        assertEquals(obj2, obj.orElse { obj2 })
     }
 
     @Test

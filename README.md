@@ -23,7 +23,7 @@ You could perform an action to log the user's name or an error message:
             .flatMap { getCurrentUserFromDatabase(it) }
             .map { it.username }
             .map { "Logged in user: %s".format(it) }
-            .orValue { "No user to login!" }
+            .orElse { "No user to login!" }
             .ifSome { log(it) }
 ```
 
