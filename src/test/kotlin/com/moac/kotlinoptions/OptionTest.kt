@@ -25,7 +25,7 @@ class TestSource {
     @Test
     fun test_filter_doesNothing_whenNull() {
         val obj: Any? = null
-        val predicate: TestPredicate<Any?> = TestPredicate(false)
+        val predicate: Func1<Any, Boolean> = Func1(false)
 
         val result: Any? = obj.filter(predicate)
 
@@ -36,7 +36,7 @@ class TestSource {
     @Test
     fun test_filter_returnsInput_whenNotNullAndPredicateReturnsTrue() {
         val obj: Any? = Any()
-        val predicate: TestPredicate<Any?> = TestPredicate(true)
+        val predicate: Func1<Any, Boolean> = Func1(true)
 
         val result: Any? = obj.filter(predicate)
 
@@ -47,7 +47,7 @@ class TestSource {
     @Test
     fun test_filter_returnsNull_whenNotNullAndPredicateReturnsFalse() {
         val obj: Any? = Any()
-        val predicate: TestPredicate<Any?> = TestPredicate(false)
+        val predicate: Func1<Any, Boolean> = Func1(false)
 
         val result: Any? = obj.filter(predicate)
 
@@ -59,7 +59,7 @@ class TestSource {
     @Test
     fun test_map_returnsNull_whenNull() {
         val obj: Any? = null
-        val mapper: TestMapper<Any, Any> = TestMapper(Any())
+        val mapper: Func1<Any, Any> = Func1(Any())
 
         val result: Any? = obj.map(mapper)
 
@@ -79,7 +79,7 @@ class TestSource {
     @Test
     fun test_flatMap_returnsNull_whenNull() {
         val obj: Any? = null
-        val flatMapper: TestFlatMapper<Any, Any?> = TestFlatMapper(Any())
+        val flatMapper: Func1<Any, Any?> = Func1(Any())
 
         val result: Any? = obj.flatMap(flatMapper)
 
@@ -205,7 +205,7 @@ class TestSource {
     }
 
     @Test
-    fun test_combine_returnsCombinedResult_whenNoNull() {
+    fun test_combine_returnsCombinedResult_whenNeitherNull() {
         val obj: Any? = Any()
         val obj2: Any? = Any()
         val result: Any = Any()
@@ -213,50 +213,79 @@ class TestSource {
         assertEquals(result, obj.combine(obj2, { v1, v2 -> result }))
     }
 
+    @Test
+    fun test_match_returnsSomeFunctionResult_whenNotNull() {
+        val obj: Any? = Any()
+        val expected: Any = Any()
+        val someFunc = Func1<Any, Any>(expected)
+        val noneFunc = Func0(Any())
+
+        assertEquals(expected, obj.match(someFunc, noneFunc))
+        assertTrue(someFunc.wasInvoked())
+        assertFalse(noneFunc.wasInvoked())
+    }
+
+    @Test
+    fun test_match_returnsNoneFunctionResult_whenNull() {
+        val obj: Any? = null
+        val expected: Any = Any()
+        val someFunc = Func1<Any, Any>(Any())
+        val noneFunc = Func0(expected)
+
+        assertEquals(expected, obj.match(someFunc, noneFunc))
+        assertFalse(someFunc.wasInvoked())
+        assertTrue(noneFunc.wasInvoked())
+    }
+
+    @Test
+    fun test_matchAction_performsSomeAction_whenNotNull() {
+        val obj: Any? = Any()
+        val someAction = Func1<Any, Unit>(Unit)
+        val noneAction = Func0(Unit)
+
+        obj.matchAction(someAction, noneAction)
+
+        assertTrue(someAction.wasInvoked())
+        assertFalse(noneAction.wasInvoked())
+    }
+
+    @Test
+    fun test_matchAction_performsNoneAction_whenNull() {
+        val obj: Any? = null
+        val someAction = Func1<Any, Unit>(Unit)
+        val noneAction = Func0(Unit)
+
+        obj.matchAction(someAction, noneAction)
+
+        assertFalse(someAction.wasInvoked())
+        assertTrue(noneAction.wasInvoked())
+    }
+
     // Helpers
 
     data class Dummy(val nullable: Any?) {
     }
 
-    class TestPredicate<T>(expectedResult: Boolean) : (T) -> Boolean {
+    class Func0<R>(result: R) : Call(), () -> R {
+        private val result: R = result
 
-        private var isInvoked: Boolean = false
-        private val expectedResult: Boolean = expectedResult
-
-        override fun invoke(p1: T): Boolean {
+        override fun invoke(): R {
             isInvoked = true
-            return expectedResult
-        }
-
-        fun wasInvoked(): Boolean {
-            return this.isInvoked
+            return result
         }
     }
 
-    class TestMapper<T, R : Any>(expectedResult: R) : (T) -> R {
-
-        private var isInvoked: Boolean = false
-        private val expectedResult: R = expectedResult
+    class Func1<T, R>(result: R) : Call(), (T) -> R {
+        private val result: R = result
 
         override fun invoke(p1: T): R {
             isInvoked = true
-            return expectedResult
-        }
-
-        fun wasInvoked(): Boolean {
-            return this.isInvoked
+            return result
         }
     }
 
-    class TestFlatMapper<T : Any, R>(expectedResult: R) : (T) -> R {
-
-        private var isInvoked: Boolean = false
-        private val expectedResult: R = expectedResult
-
-        override fun invoke(p1: T): R {
-            isInvoked = true
-            return expectedResult
-        }
+    abstract class Call {
+        protected var isInvoked: Boolean = false
 
         fun wasInvoked(): Boolean {
             return this.isInvoked
