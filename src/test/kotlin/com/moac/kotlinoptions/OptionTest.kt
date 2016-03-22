@@ -6,7 +6,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
-class TestSource {
+class OptionTest {
 
     @Test(expected = IllegalArgumentException::class)
     fun test_getOrThrow_throws_whenNull() {
