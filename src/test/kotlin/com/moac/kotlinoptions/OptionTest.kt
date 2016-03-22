@@ -263,10 +263,9 @@ class TestSource {
 
     // Helpers
 
-    data class Dummy(val nullable: Any?) {
-    }
+    private data class Dummy(val nullable: Any?) {}
 
-    class Func0<R>(result: R) : Call(), () -> R {
+    private class Func0<R>(result: R) : Call(), () -> R {
         private val result: R = result
 
         override fun invoke(): R {
@@ -275,7 +274,7 @@ class TestSource {
         }
     }
 
-    class Func1<T, R>(result: R) : Call(), (T) -> R {
+    private class Func1<T, R>(result: R) : Call(), (T) -> R {
         private val result: R = result
 
         override fun invoke(p1: T): R {
@@ -284,7 +283,7 @@ class TestSource {
         }
     }
 
-    abstract class Call {
+    private abstract class Call {
         protected var isInvoked: Boolean = false
 
         fun wasInvoked(): Boolean {
