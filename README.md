@@ -35,7 +35,7 @@ You could perform an action to log the user's name or an error message:
 
 ## License
 
-    Copyright 2015 Peter Tackage
+    Copyright 2016 Peter Tackage
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
