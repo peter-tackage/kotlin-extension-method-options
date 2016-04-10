@@ -154,7 +154,6 @@ class NullableExTest {
         assertTrue(invoked)
     }
 
-
     @Test
     fun test_ifNone_invokes_whenNull() {
         val obj: Any? = null
