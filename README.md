@@ -23,8 +23,8 @@ You could perform an action to log the user's name or an error message:
             .flatMap { getCurrentUserFromDatabase(it) }
             .map { it.username }
             .map { "Logged in user: %s".format(it) }
-            .orElse { "No user to login!" }
             .ifSome { log(it) }
+            .orElse { "No user to login!" }
 ```
 
 ## Options in other languages
@@ -38,7 +38,7 @@ You could perform an action to log the user's name or an error message:
     Copyright 2016 Peter Tackage
 
     Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use tÅhis file except in compliance with the License.
+    you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
        http://www.apache.org/licenses/LICENSE-2.0
