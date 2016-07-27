@@ -9,21 +9,21 @@ import kotlin.test.assertTrue
 class NullableExTest {
 
     @Test(expected = IllegalArgumentException::class)
-    fun test_getOrThrow_throws_whenNull() {
+    fun getOrThrow_throws_whenNull() {
         val obj: Any? = null
 
         obj.getOrThrow(IllegalArgumentException())
     }
 
     @Test
-    fun test_getOrThrow_doesNotThrow_whenNotNull() {
+    fun getOrThrow_doesNotThrow_whenNotNull() {
         val obj: Any? = Any()
 
         assertEquals(obj, obj.getOrThrow(Throwable()))
     }
 
     @Test
-    fun test_filter_doesNothing_whenNull() {
+    fun filter_doesNothing_whenNull() {
         val obj: Any? = null
         val predicate: Func1<Any, Boolean> = Func1(false)
 
@@ -34,7 +34,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_filter_returnsInput_whenNotNullAndPredicateReturnsTrue() {
+    fun filter_returnsInput_whenNotNullAndPredicateReturnsTrue() {
         val obj: Any? = Any()
         val predicate: Func1<Any, Boolean> = Func1(true)
 
@@ -45,7 +45,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_filter_returnsNull_whenNotNullAndPredicateReturnsFalse() {
+    fun filter_returnsNull_whenNotNullAndPredicateReturnsFalse() {
         val obj: Any? = Any()
         val predicate: Func1<Any, Boolean> = Func1(false)
 
@@ -57,7 +57,7 @@ class NullableExTest {
 
 
     @Test
-    fun test_map_returnsNull_whenNull() {
+    fun map_returnsNull_whenNull() {
         val obj: Any? = null
         val mapper: Func1<Any, Any> = Func1(Any())
 
@@ -68,7 +68,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_map_returnsMappedInput_whenNotNull() {
+    fun map_returnsMappedInput_whenNotNull() {
         val obj: Int? = 1
 
         val result: Int? = obj.map { it -> it * 2 }
@@ -77,7 +77,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_flatMap_returnsNull_whenNull() {
+    fun flatMap_returnsNull_whenNull() {
         val obj: Any? = null
         val flatMapper: Func1<Any, Any?> = Func1(Any())
 
@@ -88,7 +88,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_flatMap_returnsFlatmappedInput_whenNotNull() {
+    fun flatMap_returnsFlatmappedInput_whenNotNull() {
         val inner: Any? = Any()
         val obj: Dummy? = Dummy(inner)
 
@@ -98,38 +98,38 @@ class NullableExTest {
     }
 
     @Test
-    fun test_isSome_returnTrue_whenNotNull() {
+    fun isSome_returnTrue_whenNotNull() {
         assertTrue(Any().isSome())
     }
 
     @Test
-    fun test_isSome_returnFalse_whenNull() {
+    fun isSome_returnFalse_whenNull() {
         val obj: Any? = null
 
         assertFalse(obj.isSome())
     }
 
     @Test
-    fun test_isNone_returnTrue_whenNull() {
+    fun isNone_returnTrue_whenNull() {
         val obj: Any? = null
 
         assertTrue(obj.isNone())
     }
 
     @Test
-    fun test_isNone_returnFalse_whenNotNull() {
+    fun isNone_returnFalse_whenNotNull() {
         assertFalse(Any().isNone())
     }
 
     @Test
-    fun test_orNullable_returnInput_whenNotNull() {
+    fun orNullable_returnInput_whenNotNull() {
         val obj: Any? = Any()
 
         assertEquals(obj, obj.orNullable { Any() })
     }
 
     @Test
-    fun test_orNullable_returnAlternative_whenNull() {
+    fun orNullable_returnAlternative_whenNull() {
         val obj: Any? = null
         val obj2: Any? = Any()
 
@@ -137,7 +137,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_ifSome_doesNotInvoke_whenNull() {
+    fun ifSome_doesNotInvoke_whenNull() {
         val obj: Any? = null
         var invoked: Boolean = false
 
@@ -146,7 +146,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_ifSome_invokes_whenNotNull() {
+    fun ifSome_invokes_whenNotNull() {
         val obj: Any? = Any()
         var invoked: Boolean = false
 
@@ -155,7 +155,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_ifNone_invokes_whenNull() {
+    fun ifNone_invokes_whenNull() {
         val obj: Any? = null
         var invoked: Boolean = false
 
@@ -164,7 +164,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_ifNone_doesNotInvoke_whenNotNull() {
+    fun ifNone_doesNotInvoke_whenNotNull() {
         val obj: Any? = Any()
         var invoked: Boolean = false
 
@@ -173,14 +173,14 @@ class NullableExTest {
     }
 
     @Test
-    fun test_orElse_returnsInput_whenNotNull() {
+    fun orElse_returnsInput_whenNotNull() {
         val obj: Any? = Any()
 
         assertEquals(obj, obj.orElse { Any() })
     }
 
     @Test
-    fun test_orElse_returnsAlternative_whenNull() {
+    fun orElse_returnsAlternative_whenNull() {
         val obj: Any? = null
         val obj2: Any? = Any()
 
@@ -188,7 +188,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_combine_returnsNull_whenFirstNull() {
+    fun combine_returnsNull_whenFirstNull() {
         val obj: Any? = null
         val obj2: Any? = Any()
 
@@ -196,7 +196,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_combine_returnsNull_whenSecondNull() {
+    fun combine_returnsNull_whenSecondNull() {
         val obj: Any? = Any()
         val obj2: Any? = null
 
@@ -204,7 +204,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_combine_returnsCombinedResult_whenNeitherNull() {
+    fun combine_returnsCombinedResult_whenNeitherNull() {
         val obj: Any? = Any()
         val obj2: Any? = Any()
         val result: Any = Any()
@@ -213,7 +213,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_match_returnsSomeFunctionResult_whenNotNull() {
+    fun match_returnsSomeFunctionResult_whenNotNull() {
         val obj: Any? = Any()
         val expected: Any = Any()
         val someFunc = Func1<Any, Any>(expected)
@@ -225,7 +225,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_match_returnsNoneFunctionResult_whenNull() {
+    fun match_returnsNoneFunctionResult_whenNull() {
         val obj: Any? = null
         val expected: Any = Any()
         val someFunc = Func1<Any, Any>(Any())
@@ -237,7 +237,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_matchAction_performsSomeAction_whenNotNull() {
+    fun matchAction_performsSomeAction_whenNotNull() {
         val obj: Any? = Any()
         val someAction = Func1<Any, Unit>(Unit)
         val noneAction = Func0(Unit)
@@ -249,7 +249,7 @@ class NullableExTest {
     }
 
     @Test
-    fun test_matchAction_performsNoneAction_whenNull() {
+    fun matchAction_performsNoneAction_whenNull() {
         val obj: Any? = null
         val someAction = Func1<Any, Unit>(Unit)
         val noneAction = Func0(Unit)
@@ -289,5 +289,7 @@ class NullableExTest {
             return this.isInvoked
         }
     }
+
+
 
 }
