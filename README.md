@@ -10,7 +10,7 @@ This began as experiment into Kotlin language features and to determine whether 
 
 From the [Kotlin reference guide](https://kotlinlang.org/docs/reference/extensions.html)
 
-> If a class has a member function, and an extension function is defined which has the same receiver type, the same name and is applicable to given arguments, the member always wins.```
+> If a class has a member function, and an extension function is defined which has the same receiver type, the same name and is applicable to given arguments, the member always wins.
 
 Now, it would be completely reasonable for a class to have the freedom to define its own methods independently of those defined in `NullableEx.kt`, including defining a class member function with the same signature. From the quoted text above, the class member function, rather than the extension would be invoked.
 
