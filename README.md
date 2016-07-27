@@ -2,6 +2,8 @@
 
 A collection of Kotlin extension methods that allow you powerfully transform Kotlin's nullable types.
 
+[![Build Status](https://travis-ci.org/peter-tackage/kotlin-options.svg?branch=master)](https://travis-ci.org/peter-tackage/kotlin-options)
+
 ## Usage:
 
 Take a nullable type and chain together operators to transform as required.
