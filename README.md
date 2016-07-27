@@ -12,9 +12,11 @@ From the [Kotlin reference guide](https://kotlinlang.org/docs/reference/extensio
 
 > If a class has a member function, and an extension function is defined which has the same receiver type, the same name and is applicable to given arguments, the member always wins.```
 
-Now, it would be completely reasonable for a class to have the freedom to define its own methods independently of those defined in `NullableEx.kt`; including uses the same signature. The result being that the class member function, rather than the extension would be invoked.
+Now, it would be completely reasonable for a class to have the freedom to define its own methods independently of those defined in `NullableEx.kt`, including defining a class member function with the same signature. From the quoted text above, the class member function, rather than the extension would be invoked.
 
-This places great practical limits on the extensions, to the point where you most likely won't find them an effective tool in production code.
+This places great practical limits on the `NullableEx.kt` extensions; you would be unable to chain certain class instances on the basis of their conflicting method signatures.
+
+My sad conclusion is that you most likely won't find these extensions an effective tool in production code. It was a least a fun experiment!
 
 ## Usage:
 
