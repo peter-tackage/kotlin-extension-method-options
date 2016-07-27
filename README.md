@@ -4,6 +4,18 @@ A collection of Kotlin extension methods that allow you powerfully transform Kot
 
 [![Build Status](https://travis-ci.org/peter-tackage/kotlin-options.svg?branch=master)](https://travis-ci.org/peter-tackage/kotlin-options)
 
+## Limitations
+
+This began as experiment into Kotlin language features and to determine whether the basic nullable type could be made more powerful. As the implementation uses extension methods defined on the `Any?` type, it suffers from a fatal flaw.
+
+From the [Kotlin reference guide](https://kotlinlang.org/docs/reference/extensions.html)
+
+> If a class has a member function, and an extension function is defined which has the same receiver type, the same name and is applicable to given arguments, the member always wins.```
+
+Now, it would be completely reasonable for a class to have the freedom to define its own methods independently of those defined in `NullableEx.kt`; including uses the same signature. The result being that the class member function, rather than the extension would be invoked.
+
+This places great practical limits on the extensions, to the point where you most likely won't find them an effective tool in production code.
+
 ## Usage:
 
 Take a nullable type and chain together operators to transform as required.
