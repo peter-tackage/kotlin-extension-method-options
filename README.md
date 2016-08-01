@@ -45,6 +45,7 @@ You could perform an action to log the user's name or an error message:
 
 ## Options in other languages
 
+* [Java 6](https://github.com/tomaszpolanski/Options)
 * [Java 8](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)
 * [Scala](http://www.scala-lang.org/api/2.7.4/scala/Option.html)
 * [Swift](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/OptionalChaining.html)
